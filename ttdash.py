@@ -17,7 +17,9 @@ pio.renderers.default = "iframe"
 st.set_page_config(layout="wide")
 df = pd.read_csv("taton.csv")
 
-tab1, tab2 = st.tabs(["correlation :bar_chart:", "cek detail :tea:"])
+tab1, tab2, tab3 = st.tabs(
+    ["correlation :bar_chart:", "cek detail :tea:", "scatter_3D"]
+)
 
 with tab1:
     col1, col2 = st.columns([2, 3])
@@ -80,3 +82,14 @@ with tab2:
             opacity=0.5,
         )
         st.plotly_chart(fig, theme=None, use_container_width=True)
+
+with tab3:
+    fig = px.scatter_3d(
+        df,
+        x="B_a",
+        y="B_b",
+        z="B_L",
+        color="color_code",
+        opacity=0.5,
+    )
+    st.plotly_chart(fig, theme=None, use_container_width=True)
